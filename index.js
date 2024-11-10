@@ -7,10 +7,6 @@ const EXCLUDE_DIRS = ["node_modules", ".next", ".out", ".dist", ".git", "build",
 
 const INCLUDE_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"];
 
-/**
- * Idea - Check for envs which are not being used in the codebase and also which are used but not declared in the .env file
- */
-
 // Process command line arguments
 function processArgs() {
   const args = process.argv.slice(2);
@@ -21,7 +17,14 @@ function processArgs() {
   };
 
   args.forEach((arg, index) => {
-    if (arg === "--dir" || arg === "-d") {
+    if (arg === "--help" || arg === "-h") {
+      console.log("Usage: chkenv [options]");
+      console.log("");
+      console.log("Options:");
+      console.log("  --dir, -d  Directory to analyze (default: current directory)");
+      console.log("  --env, -e  Environment file name (default: .env)");
+      process.exit(0);
+    } else if (arg === "--dir" || arg === "-d") {
       options.dir = args[index + 1] || process.cwd();
     } else if (arg === "--env" || arg === "-e") {
       options.envFile = args[index + 1] || ".env";
@@ -35,7 +38,10 @@ function processArgs() {
 function getEnvsAndFiles(envFileName, dirName) {
   // Read env file
   const envFileContent = fs.readFileSync(envFileName, "utf-8");
-  const envs = envFileContent.split("\n").map(line => line.split("=")[0]);
+  const envs = envFileContent
+    .split("\n")
+    .filter(l => l.length)
+    .map(line => line.split("=")[0]);
 
   // Get source files
   const files = [];
@@ -89,20 +95,28 @@ function checkEnvs(envs, files) {
 
 function main() {
   try {
+    console.log("🔍 Analyzing Environment Variables...\n");
+
     const options = processArgs();
-
-    console.log("Working directory:", options.dir);
-    console.log("Environment file:", options.envFile);
-
     const { envs, files } = getEnvsAndFiles(options.envFile, options.dir);
     const result = checkEnvs(envs, files);
 
-    console.log("Environment variables not being used:", result.unused);
-    console.log(
-      `Environment variables not declared in the ${options.envFile} file:`,
-      result.undeclared
-    );
+    console.log("❌ Unused Variables:", result.unused.length === 0 ? "None" : "");
+    if (result.unused.length) {
+      result.unused.forEach(env => console.log(`  - ${env}`));
+    }
+    console.log("");
 
+    console.log("⚠️ Undeclared Variables:", result.undeclared.length === 0 ? "None" : "");
+    if (result.undeclared.length) {
+      result.undeclared.forEach(env => console.log(`  - ${env}`));
+    }
+    console.log("");
+
+    console.log("✨ Summary:");
+    console.log(`  - Total Source Files: ${files.length}`);
+    console.log(`  - Unused Variables: ${result.unused.length}`);
+    console.log(`  - Undeclared Variables: ${result.undeclared.length}`);
     process.exit(0);
   } catch (error) {
     console.error("Error:", error);

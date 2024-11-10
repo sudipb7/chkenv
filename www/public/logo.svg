@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- Container -->
+  <g transform="translate(20, 20)">
+    <!-- Main shape with cut corner -->
+    <path 
+      d="M0,40 
+         C0,20 20,0 40,0 
+         h120 
+         l40,40
+         v120 
+         c0,20 -20,40 -40,40 
+         h-120 
+         c-20,0 -40,-20 -40,-40 
+         z" 
+      fill="white"
+      stroke="black" 
+      stroke-width="8"
+    />
+    
+    <!-- Folded corner -->
+    <path 
+      d="M160,0 
+         l40,40 
+         h-40 
+         v-40" 
+      fill="black"
+    />
+    
+    <!-- Command prompt arrow -->
+    <path 
+      d="M40,60 l15,15 l-15,15" 
+      fill="none" 
+      stroke="black" 
+      stroke-width="8" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+    
+    <!-- ENV letters in minimal style -->
+    <g transform="translate(70, 75)">
+      <!-- E -->
+      <path d="M0,0 v30 M0,0 h20 M0,15 h15 M0,30 h20" 
+        fill="none" 
+        stroke="black" 
+        stroke-width="8" 
+        stroke-linecap="round"
+      />
+      <!-- N -->
+      <path d="M35,0 v30 M35,0 l20,30 M55,0 v30" 
+        fill="none" 
+        stroke="black" 
+        stroke-width="8" 
+        stroke-linecap="round"
+      />
+      <!-- V -->
+      <path d="M75,0 l10,30 l10,-30" 
+        fill="none" 
+        stroke="black" 
+        stroke-width="8" 
+        stroke-linecap="round"
+      />
+    </g>
+    
+    <!-- Status check symbol -->
+    <path 
+      d="M40,140 l20,20 l50,-50" 
+      fill="none" 
+      stroke="black" 
+      stroke-width="8" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+    
+    <!-- Decorative code lines -->
+    <g transform="translate(120, 125)" stroke="black" stroke-width="4" stroke-linecap="round">
+      <line x1="0" y1="0" x2="30" y2="0" />
+      <line x1="0" y1="15" x2="20" y2="15" />
+      <line x1="0" y1="30" x2="25" y2="30" />
+    </g>
+  </g>
+</svg>

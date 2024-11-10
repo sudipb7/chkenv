@@ -1,0 +1,8 @@
+.env
+.next
+.turbo
+dist
+node_modules
+public
+.git
+.vscode

@@ -27,7 +27,11 @@ function processArgs() {
   };
 
   args.forEach((arg, index) => {
-    if (arg === "--help" || arg === "-h") {
+    if (arg === "--version" || arg === "-v") {
+      const pkg = require("./package.json");
+      console.log("v" + pkg.version);
+      process.exit(0);
+    } else if (arg === "--help" || arg === "-h") {
       console.log("Usage: chkenv [options]");
       console.log("");
       console.log("Options:");
@@ -50,17 +54,17 @@ function getEnvsAndFiles(envFileName, dirName) {
   const envFileContent = fs.readFileSync(envFileName, "utf-8");
   const envs = envFileContent
     .split("\n")
-    .filter(l => l.length)
-    .map(line => line.split("=")[0]);
+    .filter((l) => l.length)
+    .map((line) => line.split("=")[0]);
 
   // Get source files
   const files = [];
 
-  fs.readdirSync(dirName, { recursive: true }).forEach(file => {
+  fs.readdirSync(dirName, { recursive: true }).forEach((file) => {
     const filePath = path.join(dirName, file);
 
     // Check if any part of the path contains an excluded directory
-    if (EXCLUDE_DIRS.some(dir => filePath.includes(`${path.sep}${dir}${path.sep}`))) {
+    if (EXCLUDE_DIRS.some((dir) => filePath.includes(`${path.sep}${dir}${path.sep}`))) {
       return;
     }
 
@@ -85,7 +89,7 @@ function checkEnvs(envs, files) {
     for (const line of lines) {
       const matches = line.match(/(process\.env|import\.meta\.env)\.[A-Z_]+/g);
       if (matches) {
-        matches.forEach(match => {
+        matches.forEach((match) => {
           const envName = match.split(".")[2];
           envsUsed.add(envName);
 
@@ -97,7 +101,7 @@ function checkEnvs(envs, files) {
     }
   }
 
-  const unusedEnvs = envs.filter(env => !envsUsed.has(env));
+  const unusedEnvs = envs.filter((env) => !envsUsed.has(env));
 
   return {
     unused: unusedEnvs,
@@ -116,13 +120,13 @@ function main() {
 
     console.log("❌ Unused Variables:", result.unused.length === 0 ? "None" : "");
     if (result.unused.length) {
-      result.unused.forEach(env => console.log(`  - ${env}`));
+      result.unused.forEach((env) => console.log(`  - ${env}`));
     }
     console.log("");
 
     console.log("⚠️ Undeclared Variables:", result.undeclared.length === 0 ? "None" : "");
     if (result.undeclared.length) {
-      result.undeclared.forEach(env => console.log(`  - ${env}`));
+      result.undeclared.forEach((env) => console.log(`  - ${env}`));
     }
     console.log("");
 

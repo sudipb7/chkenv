@@ -1,22 +1,18 @@
 {
   "name": "chkenv",
-  "version": "0.1.2",
-  "description": "Check environment variables",
-  "license": "MIT",
-  "main": "index.js",
-  "author": {
-    "name": "Sudip Biswas",
-    "url": "https://x.com/sudipbiswas_dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sudipb7/chkenv.git"
-  },
-  "keywords": [],
-  "bin": {
-    "chkenv": "./index.js"
-  },
+  "private": true,
   "scripts": {
-    "start": "node index.js"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{md,yaml,js,jsx,json,mjs,css}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "^2.2.3"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
   }
 }

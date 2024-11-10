@@ -3,7 +3,17 @@
 const fs = require("fs");
 const path = require("path");
 
-const EXCLUDE_DIRS = ["node_modules", ".next", ".out", ".dist", ".git", "build", ".cache"];
+const EXCLUDE_DIRS = [
+  "node_modules",
+  ".next",
+  ".out",
+  ".dist",
+  ".git",
+  "build",
+  ".cache",
+  "public",
+  ".vscode",
+];
 
 const INCLUDE_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -45,14 +55,16 @@ function getEnvsAndFiles(envFileName, dirName) {
 
   // Get source files
   const files = [];
+
   fs.readdirSync(dirName, { recursive: true }).forEach(file => {
     const filePath = path.join(dirName, file);
-    const stat = fs.statSync(filePath);
 
-    if (stat.isDirectory() && EXCLUDE_DIRS.includes(file)) {
+    // Check if any part of the path contains an excluded directory
+    if (EXCLUDE_DIRS.some(dir => filePath.includes(`${path.sep}${dir}${path.sep}`))) {
       return;
     }
 
+    const stat = fs.statSync(filePath);
     if (stat.isFile() && INCLUDE_EXTENSIONS.includes(path.extname(file))) {
       files.push(filePath);
     }
@@ -95,9 +107,10 @@ function checkEnvs(envs, files) {
 
 function main() {
   try {
+    const options = processArgs();
+
     console.log("🔍 Analyzing Environment Variables...\n");
 
-    const options = processArgs();
     const { envs, files } = getEnvsAndFiles(options.envFile, options.dir);
     const result = checkEnvs(envs, files);
 

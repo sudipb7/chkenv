@@ -1,16 +1,8 @@
----
-title: "Limited Counter"
-description: "Counter which is aware of its value and behaves accordingly."
-date: "2024-10-04"
-keywords: []
-type: "interaction"
----
-
 # chkenv
 
 A command-line tool to analyze environment variables in your project. It helps you identify unused environment variables declared in your `.env` file and undeclared environment variables used in your code.
 
-[npm](https://www.npmjs.com/package/chkenv) | [github](https://github.com/sudipb7/chkenv)
+[NPM](https://www.npmjs.com/package/chkenv) | [GitHub](https://github.com/sudipb7/chkenv)
 
 ## Features
 
@@ -32,8 +24,6 @@ npx chkenv
 
 ## Usage
 
-Basic usage:
-
 ```bash
 chkenv [options]
 ```
@@ -42,43 +32,19 @@ chkenv [options]
 
 ```bash
 Options:
-  -e, --env <path>     Path to env file (default: ".env")
-  -d, --dir <path>     Directory to scan (default: current directory)
-  -h, --help           Display help information
-  -v, --version        Display version information
-```
-
-### Examples
-
-1. Basic usage with default options:
-
-```bash
-chkenv
-```
-
-This will scan current directory using `.env` file in the current directory.
-
-2. Specify a custom env file:
-
-```bash
-chkenv --env .env.local
-```
-
-3. Scan a different directory:
-
-```bash
-chkenv --dir app
-```
-
-4. Combine options:
-
-```bash
-chkenv --env .env.production --dir src/app
+  -h, --help                Show help
+  -v, --version             Show version
+  -d, --default             Run with default options
+  -p, --path <path>         Directory to analyze (default: ./)
+  -c, --config <path>       Configuration file name (default: .env.local)
 ```
 
 ### Output Example
 
 ```bash
+Enter the directory to analyze (default: ./):
+Enter the configuration file name (default: .env.local):
+
 🔍 Analyzing Environment Variables...
 
 ❌ Unused Variables:
@@ -107,15 +73,17 @@ chkenv --env .env.production --dir src/app
 - `node_modules`
 - `.next`
 - `.out`
-- `.dist`
+- `dist`
 - `.git`
 - `build`
 - `.cache`
+- `public`
+- `.vscode`
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Help/Contact
+## More
 
 For any help or queries, you can reach out to me on [X](https://x.com/sudipbiswas_dev) | [LinkedIn](https://linkedin.com/in/sudipb7) | [Peerlist](https://peerlist.io/sudipbiswas).

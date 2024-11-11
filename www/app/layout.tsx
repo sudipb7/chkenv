@@ -38,7 +38,7 @@ export default function RootLayout({
           storageKey="theme"
           disableTransitionOnChange
         >
-          <div className="py-14 sm:py-24 px-6 xs:px-10 sm:px-20 max-w-3xl mx-auto">{children}</div>
+          <div className="py-14 sm:py-24 px-6 xs:px-10 sm:px-14 max-w-3xl mx-auto">{children}</div>
         </ThemeProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 {
   "name": "chkenv",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Check environment variables",
   "license": "MIT",
   "main": "index.js",

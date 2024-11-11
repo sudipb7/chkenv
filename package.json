@@ -5,7 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{md,yaml,js,jsx,json,mjs,css}\""
+    "format": "prettier --write \"**/*.{md,mdx,yaml,js,jsx,json,mjs,css}\""
   },
   "devDependencies": {
     "prettier": "^3.2.5",

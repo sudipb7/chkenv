@@ -37,7 +37,10 @@ Options:
   -d, --default             Run with default options
   -p, --path <path>         Directory to analyze (default: ./)
   -c, --config <path>       Configuration file name (default: .env.local)
+  -a, --all                 Include commented environment variables
 ```
+
+> chkenv does not check commented environment variables by default. If you want to include them, then use `-a` or `--all` flag.
 
 ### Examples
 
@@ -54,7 +57,7 @@ Enter the directory to analyze (default: ./):
 Enter the configuration file name (default: .env.local):
 ```
 
-2. You can use the -d or --default flag for defaults i.e `./` and `.env.local` -
+2. You can use the -d or --default flag for defaults i.e `./` and `.env.local` and ignore commented environment variables -
 
 ```bash
 chkenv -d
@@ -76,6 +79,12 @@ chkenv --path src/app
 
 ```bash
 chkenv --config .env.production --path src/app
+```
+
+6. Include commented environment variables:
+
+```bash
+chkenv --all
 ```
 
 ### Output Example
@@ -103,6 +112,8 @@ chkenv --config .env.production --path src/app
 - `.jsx`
 - `.ts`
 - `.tsx`
+- `.mjs`
+- `.cjs`
 
 ## Excluded Directories
 
@@ -115,6 +126,10 @@ chkenv --config .env.production --path src/app
 - `.cache`
 - `public`
 - `.vscode`
+- `.turbo`
+- `logs`
+- `.idea`
+- `.expo`
 
 ## Contributing
 

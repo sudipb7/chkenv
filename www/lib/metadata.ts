@@ -2,7 +2,7 @@ import { Metadata, Viewport } from "next";
 
 const siteConfig = {
   title: "chkenv",
-  description: "chkenv is a tool to check the environment variables of your project.",
+  description: "The environment variable detective your codebase needs",
   ogImage: "https://chkenv.sudipbiswas.dev/og.png",
   url: "https://chkenv.sudipbiswas.dev",
   links: {

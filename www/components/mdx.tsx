@@ -35,24 +35,6 @@ const components = {
   li: ({ children }: React.HTMLProps<HTMLLIElement>) => (
     <li className="ml-2 text-muted-foreground">{children}</li>
   ),
-  tr: (props: React.HTMLProps<HTMLTableRowElement>) => (
-    <tr className="m-0 border-t p-0" {...props} />
-  ),
-  th: (props: React.HTMLProps<HTMLTableCellElement>) => (
-    <th
-      className="border px-4 py-2 text-left font-medium [&[align=center]]:text-center [&[align=right]]:text-right"
-      {...props}
-    />
-  ),
-  td: (props: React.HTMLProps<HTMLTableCellElement>) => (
-    <td
-      className="border text-muted-foreground px-4 py-1.5 text-[15px] text-left [&[align=center]]:text-center [&[align=right]]:text-right"
-      {...props}
-    />
-  ),
-  table: (props: React.HTMLProps<HTMLTableElement>) => (
-    <table className="w-full table-auto border rounded-lg" {...props} />
-  ),
   code: (props: React.HTMLProps<HTMLElement>) => {
     const isInline = typeof props.children === "string" && !props.children.includes("\n");
     return (

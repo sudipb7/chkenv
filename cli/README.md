@@ -22,8 +22,6 @@ npx chkenv
 
 ## Usage
 
-Basic usage:
-
 ```bash
 chkenv [options]
 ```
@@ -32,38 +30,50 @@ chkenv [options]
 
 ```bash
 Options:
-  -e, --env <path>     Path to env file (default: ".env")
-  -d, --dir <path>     Directory to scan (default: current directory)
-  -h, --help           Display help information
-  -v, --version        Display version information
+  -h, --help                Show help
+  -v, --version             Show version
+  -d, --default             Run with default options
+  -p, --path <path>         Directory to analyze (default: ./)
+  -c, --config <path>       Configuration file name (default: .env.local)
 ```
 
 ### Examples
 
-1. Basic usage with default options:
+1. Basic usage:
 
 ```bash
 chkenv
 ```
 
-This will scan current directory using `.env` file in the current directory.
-
-2. Specify a custom env file:
+You will be asked a few questions -
 
 ```bash
-chkenv --env .env.local
+Enter the directory to analyze (default: ./):
+Enter the configuration file name (default: .env.local):
 ```
 
-3. Scan a different directory:
+2. You can use the -d or --default flag for defaults i.e `./` and `.env.local` -
 
 ```bash
-chkenv --dir app
+chkenv -d
 ```
 
-4. Combine options:
+3. Specify a custom env file:
 
 ```bash
-chkenv --env .env.production --dir src/app
+chkenv --config .env.production
+```
+
+4. Scan a different directory:
+
+```bash
+chkenv --path src/app
+```
+
+5. Combine options:
+
+```bash
+chkenv --config .env.production --path src/app
 ```
 
 ### Output Example
@@ -97,15 +107,17 @@ chkenv --env .env.production --dir src/app
 - `node_modules`
 - `.next`
 - `.out`
-- `.dist`
+- `dist`
 - `.git`
 - `build`
 - `.cache`
+- `public`
+- `.vscode`
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Help/Contact
+## More
 
 For any help or queries, you can reach out to me on [X](https://x.com/sudipbiswas_dev) | [LinkedIn](https://linkedin.com/in/sudipb7) | [Peerlist](https://peerlist.io/sudipbiswas).

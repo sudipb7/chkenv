@@ -1,8 +1,8 @@
 import { Metadata, Viewport } from "next";
 
 const siteConfig = {
-  title: "ChkEnv",
-  description: "ChkEnv is a tool to check the environment variables of your project.",
+  title: "chkenv",
+  description: "chkenv is a tool to check the environment variables of your project.",
   ogImage: "https://chkenv.sudipbiswas.dev/og.jpg",
   url: "https://chkenv.sudipbiswas.dev",
   links: {
@@ -25,11 +25,11 @@ const metadata: Metadata = {
     },
   ],
   keywords: [
-    "ChkEnv",
+    "chkenv",
+    "Check Environment Variables",
+    "Check Env",
+    "Check Env Variables",
     "Environment Variables",
-    "Environment",
-    "Variables",
-    "Project",
     "Tool",
     "CLI",
     "Node.js",
@@ -37,6 +37,9 @@ const metadata: Metadata = {
     "npm",
     "yarn",
     "pnpm",
+    "bun",
+    "dotenv",
+    "cross-env",
   ],
   openGraph: {
     type: "website",

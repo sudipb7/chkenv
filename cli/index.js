@@ -8,15 +8,19 @@ const EXCLUDE_DIRS = [
   "node_modules",
   ".next",
   ".out",
-  ".dist",
+  "dist",
   ".git",
   "build",
   ".cache",
   "public",
   ".vscode",
+  ".turbo",
+  "logs",
+  ".idea",
+  ".expo",
 ];
 
-const INCLUDE_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"];
+const INCLUDE_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs"];
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -35,6 +39,7 @@ async function processArgs() {
   let cliOptions = {
     path: process.cwd(),
     configFile: ".env.local",
+    allowCommented: false,
   };
 
   const options = {
@@ -43,9 +48,17 @@ async function processArgs() {
     "-d, --default": "Run with default options",
     "-p, --path <path>": "Directory to analyze (default: ./)",
     "-c, --config <path>": "Configuration file name (default: .env.local)",
+    "-a, --all": "Include commented environment variables",
   };
 
+  const availableCommands = Object.keys(options).join(", ").replaceAll(" <path>", "").split(", ");
+
   args.forEach((arg, index) => {
+    if (!availableCommands.includes(arg)) {
+      console.error(`Unknown option: ${arg}`);
+      console.log("Use `chkenv --help` to see available options");
+      process.exit(1);
+    }
     if (arg === "--version" || arg === "-v") {
       console.log("v" + require("./package.json").version);
       process.exit(0);
@@ -67,6 +80,8 @@ async function processArgs() {
       cliOptions.path = args[index + 1];
     } else if (arg === "--config" || arg === "-c") {
       cliOptions.configFile = args[index + 1];
+    } else if (arg === "--all" || arg === "-a") {
+      cliOptions.allowCommented = true;
     }
   });
 
@@ -99,12 +114,14 @@ async function processArgs() {
   return cliOptions;
 }
 
-function getEnvsAndFiles(configFileName, dirName) {
-  const envFileContent = fs.readFileSync(configFileName, "utf-8");
+function getEnvsAndFiles(options) {
+  const { configFile, path: dirName, allowCommented } = options;
+  const envFileContent = fs.readFileSync(configFile, "utf-8");
   const envs = envFileContent
     .split("\n")
-    .filter((l) => l.length)
-    .map((line) => line.split("=")[0]);
+    .filter((line) => line.trim().length)
+    .filter((line) => allowCommented || !line.startsWith("#"))
+    .map((line) => line.split("=")[0].replace("#", "").trim());
 
   const files = [];
 
@@ -124,7 +141,7 @@ function getEnvsAndFiles(configFileName, dirName) {
   return { envs, files };
 }
 
-function checkEnvs(envs, files) {
+function checkEnvs(envs, files, allowCommented) {
   const envsUsed = new Set();
   const undeclaredEnvs = new Set();
 
@@ -135,6 +152,12 @@ function checkEnvs(envs, files) {
     for (const line of lines) {
       const matches = line.match(/(process\.env|import\.meta\.env)\.[A-Z_]+/g);
       if (matches) {
+        const commentSymbols = ["//", "/*", "*"];
+        const isComment = commentSymbols.some((symbol) => line.trim().startsWith(symbol));
+        if (!allowCommented && isComment) {
+          continue;
+        }
+
         matches.forEach((match) => {
           const envName = match.split(".")[2];
           envsUsed.add(envName);
@@ -161,17 +184,21 @@ async function main() {
 
     console.log("🔍 Analyzing Environment Variables...");
 
-    const { envs, files } = getEnvsAndFiles(options.configFile, options.path);
-    const result = checkEnvs(envs, files);
+    const { envs, files } = getEnvsAndFiles(options);
+    const result = checkEnvs(envs, files, options.allowCommented);
 
     if (result.unused.length) {
       console.log("\n❌ Unused Variables:");
       result.unused.forEach((env) => console.log(`  - ${env}`));
+    } else {
+      console.log("\n❌ Unused Variables: None");
     }
 
-    if (result.unused.length) {
+    if (result.undeclared.length) {
       console.log("\n⚠️ Undeclared Variables:");
       result.undeclared.forEach((env) => console.log(`  - ${env}`));
+    } else {
+      console.log("\n⚠️ Undeclared Variables: None");
     }
 
     console.log("\n✨ Summary:");

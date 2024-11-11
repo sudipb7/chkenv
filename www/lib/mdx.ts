@@ -5,7 +5,6 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
 
 import components from "@/components/mdx";
-import { FrontMatter } from "@/types/mdx";
 
 const ROOT = path.join(process.cwd(), "docs");
 
@@ -13,11 +12,10 @@ export async function getMDXPage(slug: string) {
   const fullPath = path.join(ROOT, `${slug}.mdx`);
   const fileContent = fs.readFileSync(fullPath, "utf8");
 
-  const { content, frontmatter } = await compileMDX({
+  const { content } = await compileMDX({
     source: fileContent,
     components,
     options: {
-      parseFrontmatter: true,
       mdxOptions: {
         remarkPlugins: [remarkGfm],
         rehypePlugins: [
@@ -30,11 +28,5 @@ export async function getMDXPage(slug: string) {
     },
   });
 
-  return {
-    mdxContent: content,
-    meta: {
-      ...frontmatter,
-      slug,
-    } as FrontMatter,
-  };
+  return content;
 }

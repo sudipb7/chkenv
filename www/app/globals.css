@@ -88,13 +88,6 @@ code[data-theme*=" "] span {
   background-color: #0d0d0c;
 }
 
-@media (min-width: 768px) {
-  figcaption[data-rehype-pretty-code-title] {
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-  }
-}
-
 figure[data-rehype-pretty-code-figure] > pre {
   border-radius: var(--radius);
 }

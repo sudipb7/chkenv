@@ -1,6 +1,6 @@
 # chkenv
 
-The environment variable detective your codebase needs. Free. Open Source. **It helps you identify unused environment variables declared in your `.env` file and undeclared environment variables used in your code.**.
+The environment variable detective your codebase needs. **A command-line tool to analyze environment variables in your project and manage them efficiently.**
 
 ![hero](www/public/og.png)
 

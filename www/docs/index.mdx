@@ -2,7 +2,9 @@
 
 The environment variable detective your codebase needs.
 
-A command-line tool to analyze environment variables in your project and manage them efficiently.
+A command-line tool to analyze environment variables in your project. It helps you identify unused environment variables declared in your `.env` file and undeclared environment variables used in your code.
+
+[NPM](https://www.npmjs.com/package/chkenv) | [GitHub](https://github.com/sudipb7/chkenv)
 
 ## Features
 
@@ -97,19 +99,7 @@ When cleaning up unused variables, chkenv offers three backup options:
 
 Example backup workflow:
 
-```bash
-$ chkenv -d
-🔍 Analyzing Environment Variables...
-❌ Unused Variables:
-  - API_KEY
-  - STRIPE_SECRET
-🧹 Cleanup Options
-? What would you like to do with unused variables? Comment them out
-? A backup file already exists. What would you like to do?
-> Overwrite existing backup
-Create new backup file
-Specify custom backup name
-```
+![chkenv workflow](/og.png)
 
 ## File Support
 

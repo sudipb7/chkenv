@@ -111,17 +111,32 @@ When cleaning up unused variables, chkenv offers three backup options:
 Example backup workflow:
 
 ```bash
-$ chkenv -d
+$ chkenv --cleanup
 🔍 Analyzing Environment Variables...
 ❌ Unused Variables:
   - API_KEY
   - STRIPE_SECRET
+✨ Summary:
+  - Files scanned: 42
+  - Total env variables: 15
+  - Used variables: 13
+  - Unused variables: 2
+  - Undeclared variables: 0
 🧹 Cleanup Options
-? What would you like to do with unused variables? Comment them out
+? What would you like to do with unused environment variables?
+> Keep them as is
+Remove them
+Comment them out
+? Are you sure you want to comment out 2 environment variables? (y/N)
 ? A backup file already exists. What would you like to do?
 > Overwrite existing backup
 Create new backup file
 Specify custom backup name
+✨ Environment file updated successfully!
+Backup created at: .env.local.backup
+Commented out variables:
+  - # API_KEY
+  - # STRIPE_SECRET
 ```
 
 ## File Support

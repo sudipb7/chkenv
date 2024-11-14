@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -38,6 +39,7 @@ export default function RootLayout({
           storageKey="theme"
           disableTransitionOnChange
         >
+          <Analytics />
           <div className="py-14 sm:py-24 px-6 xs:px-10 sm:px-14 max-w-3xl mx-auto">{children}</div>
         </ThemeProvider>
       </body>

@@ -36,10 +36,7 @@ export function validateCommand(command: string, availableCommands: string[]): v
 }
 
 export function shouldExcludeFile(filePath: string, excludeDirs: string[]): boolean {
-  return excludeDirs.some(
-    (dir) =>
-      filePath.includes(`${path.sep}${dir}${path.sep}`) || filePath.endsWith(`${path.sep}${dir}`)
-  );
+  return excludeDirs.some((dir) => filePath.includes(dir));
 }
 
 export function shouldIncludeFile(filePath: string, includeExts: string[]): boolean {

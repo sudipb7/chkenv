@@ -30,7 +30,7 @@ async function confirmAction(action: CleanupAction, count: number): Promise<bool
   const { confirmed } = await inquirer.prompt({
     type: "confirm",
     name: "confirmed",
-    message: `Are you sure you want to ${chalk.blue(actionWord)} ${chalk.blue(count)} environment variables?`,
+    message: `Are you sure you want to ${chalk[actionWord === "remove" ? "red" : "yellow"](actionWord)} ${count} environment variables?`,
     default: false,
   });
 

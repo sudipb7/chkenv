@@ -153,4 +153,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Contact
 
-For any help or queries, you can reach out to me on [X](https://x.com/sudipbiswas_dev) | [LinkedIn](https://linkedin.com/in/sudipb7) | [Peerlist](https://peerlist.io/sudipbiswas).
+For any help or queries, you can reach out to me on [X](https://x.com/sudipbiswas_7) | [LinkedIn](https://linkedin.com/in/sudipb7) | [Peerlist](https://peerlist.io/sudipbiswas).

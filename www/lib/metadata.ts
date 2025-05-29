@@ -6,7 +6,7 @@ const siteConfig = {
   ogImage: "https://chkenv.sudipbiswas.dev/og.png",
   url: "https://chkenv.sudipbiswas.dev",
   links: {
-    twitter: `https://x.com/sudipbiswas_dev`,
+    twitter: `https://x.com/sudipbiswas_7`,
     github: `https://github.com/sudipb7`,
   },
 };

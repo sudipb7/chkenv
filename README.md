@@ -14,4 +14,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## More
 
-For any help or queries, you can reach out to me on [X](https://x.com/sudipbiswas_dev)
+For any help or queries, you can reach out to me on [X](https://x.com/sudipbiswas_7)
